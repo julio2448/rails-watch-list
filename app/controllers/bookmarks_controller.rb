@@ -1,10 +1,11 @@
 class BookmarksController < ApplicationController
+  before_action :set_bookmark, only [@create, ]
   def create
     @bookmark = Bookmark.new(bookmark_params)
     @list = List.find(params[:list_id])
     @bookmark.list = @list
     if @bookmark.save
-    redirect_to @list
+      redirect_to @list
     else
       render :new
     end
